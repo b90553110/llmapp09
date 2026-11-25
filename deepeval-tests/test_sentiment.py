@@ -151,7 +151,25 @@ sentiment_emotion_metric = GEval(
     model=JUDGE_MODEL,
 )
 
-sentiment_relevancy_metric = answer_relevancy_metric()
+# sentiment_relevancy_metric = answer_relevancy_metric()
+
+sentiment_relevancy_metric = GEval(
+    name="Answer Relevancy",
+    criteria=(
+        "Evaluate whether the sentiment analysis in the actual output is about "
+        "the input text: the overall sentiment and emotions should fit the tone "
+        "of the input. The sentiment result is not expected to describe the topics "
+        "or facts of the input, do not penalize it for leaving them out. For "
+        "neutral, factual text, a neutral sentiment with few or no emotions is "
+        "fully relevant."
+    ),
+    evaluation_params=[
+        LLMTestCaseParams.INPUT,
+        LLMTestCaseParams.ACTUAL_OUTPUT,
+    ],
+    threshold=0.5,
+    model=JUDGE_MODEL,
+)
 
 
 # ---------------------------------------------------------------------------
