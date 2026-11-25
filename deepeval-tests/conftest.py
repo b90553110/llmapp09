@@ -76,7 +76,7 @@ def get_judge_model():
     return JudgeOllamaModel(
         model=os.getenv("DEEPEVAL_JUDGE_MODEL", "glm-5.2:cloud"),
         base_url=os.getenv("DEEPEVAL_JUDGE_BASE_URL", "http://localhost:11434"),
-        temperature=0.7,
+        temperature=0.0,
     )
 
 
